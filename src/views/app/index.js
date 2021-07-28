@@ -5,12 +5,17 @@ import { connect } from 'react-redux';
 import AppLayout from '../../layout/AppLayout';
 // import { ProtectedRoute, UserRole } from '../../helpers/authHelper';
 
-const Gogo = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-gogo" */ './gogo')
+
+const Perfil = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './meu-perfil')
 );
-const SecondMenu = React.lazy(() =>
-  import(/* webpackChunkName: "viwes-second-menu" */ './second-menu')
+const Agendamento = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './agendamentos')
 );
+const Colaborador = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './colaboradores')
+);
+
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "viwes-blank-page" */ './blank-page')
 );
@@ -21,15 +26,21 @@ const App = ({ match }) => {
       <div className="dashboard-wrapper">
         <Suspense fallback={<div className="loading" />}>
           <Switch>
-            <Redirect exact from={`${match.url}/`} to={`${match.url}/gogo`} />
+            <Redirect exact from={`${match.url}/`} to={`${match.url}/agendamentos`} />
+
             <Route
-              path={`${match.url}/gogo`}
-              render={(props) => <Gogo {...props} />}
+              path={`${match.url}/meu-perfil`}
+              render={(props) => <Perfil {...props} />}
             />
             <Route
-              path={`${match.url}/second-menu`}
-              render={(props) => <SecondMenu {...props} />}
+              path={`${match.url}/agendamentos`}
+              render={(props) => <Agendamento {...props} />}
             />
+            <Route
+              path={`${match.url}/colaboradores`}
+              render={(props) => <Colaborador {...props} />}
+            />
+        
             {/* <ProtectedRoute
                     path={`${match.url}/second-menu`}
                     component={SecondMenu}

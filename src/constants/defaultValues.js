@@ -1,7 +1,6 @@
-export const UserRole = {
-  Admin: 0,
-  Editor: 1,
-};
+/* eslint-disable import/no-cycle */
+import { UserRole } from '../helpers/authHelper';
+import { getCurrentUser } from '../helpers/Utils';
 
 /*
 Menu Types:
@@ -28,21 +27,31 @@ export const firebaseConfig = {
 };
 
 export const adminRoot = '/app';
-export const buyUrl = 'https://1.envato.market/k4z0';
-export const searchPath = `${adminRoot}/#`;
-export const servicePath = 'https://api.coloredstrategies.com';
+export const buyUrl = '';
+export const searchPath = `${adminRoot}/pages/miscellaneous/search`;
+export const servicePath = process.env.REACT_APP_API_URL;
+export const serviceMeetPath = process.env.REACT_APP_API_MEET_URL;
+export const serviceMeetBearer = process.env.REACT_APP_API_MEET_BEARER;
+export const imgPreview = `${servicePath}/img`;
 
+// export const servicePath = 'https://api.coloredstrategies.com';
+
+const user = getCurrentUser();
+if (user) {
+  const { id, nome, avatar = 'sem-foto.png' } = user;
+}
 export const currentUser = {
-  id: 1,
-  title: 'Sarah Kortney',
-  img: '/assets/img/profiles/l-1.jpg',
-  date: 'Last seen today 15:24',
+  id: 0,
+  title: '',
+  img: '',
+  date: 'Último acesso hoje às 15:24',
   role: UserRole.Admin,
 };
 
+
 export const themeColorStorageKey = '__theme_selected_color';
 export const isMultiColorActive = true;
-export const defaultColor = 'light.purplemonster';
+export const defaultColor = 'light.greenlime';
 export const isDarkSwitchActive = true;
 export const defaultDirection = 'ltr';
 export const themeRadiusStorageKey = '__theme_radius';

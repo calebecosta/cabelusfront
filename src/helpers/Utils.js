@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import {
   defaultDirection,
   defaultLocale,
@@ -6,6 +7,7 @@ import {
   themeColorStorageKey,
   themeRadiusStorageKey,
 } from '../constants/defaultValues';
+import { NotificationManager } from '../components/common/react-notifications';
 
 export const mapOrder = (array, order, key) => {
   // eslint-disable-next-line func-names
@@ -118,6 +120,21 @@ export const setCurrentRadius = (radius) => {
   }
 };
 
+export const alert = (text, time, type) => {
+  if (type === 'success') {
+    NotificationManager.success(
+      text,
+      'Deu tudo certo!',
+      time,
+      null,
+      null,
+      'filled'
+    );
+  } else {
+    NotificationManager.error(text, 'Ops!', time, null, null, 'filled');
+  }
+};
+
 export const getCurrentLanguage = () => {
   let language = defaultLocale;
   try {
@@ -152,8 +169,8 @@ export const getCurrentUser = () => {
   let user = null;
   try {
     user =
-      localStorage.getItem('gogo_current_user') != null
-        ? JSON.parse(localStorage.getItem('gogo_current_user'))
+      localStorage.getItem('@cabelus/usuario') != null
+        ? JSON.parse(localStorage.getItem('@cabelus/usuario'))
         : null;
   } catch (error) {
     console.log('>>>>: src/helpers/Utils.js  : getCurrentUser -> error', error);
@@ -165,11 +182,39 @@ export const getCurrentUser = () => {
 export const setCurrentUser = (user) => {
   try {
     if (user) {
-      localStorage.setItem('gogo_current_user', JSON.stringify(user));
+      localStorage.setItem('@cabelus/usuario', JSON.stringify(user));
     } else {
-      localStorage.removeItem('gogo_current_user');
+      localStorage.removeItem('@cabelus/usuario');
     }
   } catch (error) {
     console.log('>>>>: src/helpers/Utils.js : setCurrentUser -> error', error);
   }
+};
+
+export const cpfMask = (value) => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1');
+};
+
+export const cnpjMask = (value) => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1/$2')
+    .replace(/(\d{4})(\d)/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1');
+};
+
+export const phoneMask = (value) => {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{4})(\d)/, '$1-$2')
+    .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+    .replace(/(-\d{4})\d+?$/, '$1');
 };

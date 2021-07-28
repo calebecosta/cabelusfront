@@ -29,12 +29,20 @@ module.exports = {
   'user.reset-password-button': 'RESET',
   'user.buy': 'BUY',
   'user.username': 'Username',
+  'user.submit': 'Enviar',
+  'user.current-password': 'Senha atual',
+  'user.new-password': 'Nova senha',
+  'user.new-password-again' : 'Digite novamente',
 
   /* 03.Menu */
   'menu.home': 'Home',
   'menu.app': 'Home',
   'menu.dashboards': 'Dashboards',
   'menu.gogo': 'Gogo',
+  'menu.novo' : 'Novo',
+  'menu.meu-perfil':'Meu Perfil',
+  'menu.meus-agendamentos':'Meus agendamentos',
+  'menu.usuario': 'Usuarios',
   'menu.start': 'Start',
   'menu.second-menu': 'Second Menu',
   'menu.second': 'Second',
@@ -45,10 +53,17 @@ module.exports = {
   'menu.todo': 'Todo',
   'menu.search': 'Search',
   'menu.docs': 'Docs',
+  'menu.agendamentos': 'Agendamentos',
+  'menu.agendamento' : 'Agendamento',
+  'menu.colaboradores' : 'Colaboradores',
+  'menu.novo-agendamento': 'Novo',
+  'menu.cancelar-agendamento': 'Cancelar',
+  'menu.deletar-colaborador': 'Deletar',
   'menu.blank-page': 'Blank Page',
 
   /* 04.Error Page */
   'pages.error-title': 'Ooops... looks like an error occurred!',
   'pages.error-code': 'Error code',
   'pages.go-back-home': 'GO BACK HOME',
+  'dashboards.calendar': 'Calendário de Agendamentos',
 };

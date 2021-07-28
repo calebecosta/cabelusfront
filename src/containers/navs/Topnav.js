@@ -12,8 +12,9 @@ import {
   Input,
 } from 'reactstrap';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 
 import IntlMessages from '../../helpers/IntlMessages';
 import {
@@ -37,7 +38,9 @@ import TopnavEasyAccess from './Topnav.EasyAccess';
 import TopnavNotifications from './Topnav.Notifications';
 import TopnavDarkSwitch from './Topnav.DarkSwitch';
 
-import { getDirection, setDirection } from '../../helpers/Utils';
+import { getCurrentUser, getDirection, setDirection } from '../../helpers/Utils';
+
+
 
 const TopNav = ({
   intl,
@@ -178,7 +181,8 @@ const TopNav = ({
   };
 
   const handleLogout = () => {
-    logoutUserAction(history);
+    localStorage.clear();
+    window.location = '/';
   };
 
   const menuButtonClick = (e, _clickCount, _conClassnames) => {
@@ -200,6 +204,8 @@ const TopNav = ({
     e.preventDefault();
     clickOnMobileMenuAction(_containerClassnames);
   };
+
+  const user = getCurrentUser();
 
   const { messages } = intl;
   return (
@@ -224,7 +230,7 @@ const TopNav = ({
           <MobileMenuIcon />
         </NavLink>
 
-        <div className="search">
+        {/* <div className="search">
           <Input
             name="searchKeyword"
             id="searchKeyword"
@@ -264,15 +270,15 @@ const TopNav = ({
               })}
             </DropdownMenu>
           </UncontrolledDropdown>
-        </div>
+        </div> */}
         <div className="position-relative d-none d-none d-lg-inline-block">
-          <a
+          {/* <a
             className="btn btn-outline-primary btn-sm ml-2"
             target="_top"
             href={buyUrl}
           >
             <IntlMessages id="user.buy" />
-          </a>
+          </a> */}
         </div>
       </div>
       <NavLink className="navbar-logo" to={adminRoot}>
@@ -301,19 +307,18 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Sarah Kortney</span>
+              <span className="name mr-1">Calebe Costa</span>
               <span>
-                <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
+                <img alt="Profile" src={`https://ui-avatars.com/api/?name=${user.nome}`} />
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>
-              <DropdownItem>Account</DropdownItem>
-              <DropdownItem>Features</DropdownItem>
-              <DropdownItem>History</DropdownItem>
-              <DropdownItem>Support</DropdownItem>
+              <DropdownItem  tag={Link} to='/app/meu-perfil' >Meu Perfil</DropdownItem>
+              <DropdownItem  tag={Link} to='/app/agendamentos'  >Agendamentos</DropdownItem>
+
               <DropdownItem divider />
               <DropdownItem onClick={() => handleLogout()}>
-                Sign out
+                Sair
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

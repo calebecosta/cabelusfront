@@ -1,45 +1,43 @@
 import { adminRoot } from './defaultValues';
 
 const data = [
+
   {
-    id: 'gogo',
-    icon: 'iconsminds-air-balloon-1',
-    label: 'menu.gogo',
-    to: `${adminRoot}/gogo`,
+    id: 'docs',
+    icon: 'iconsminds-check',
+    label: 'menu.agendamentos',
+    to: `${adminRoot}/agendamentos`,
     subs: [
       {
-        icon: 'simple-icon-paper-plane',
-        label: 'menu.start',
-        to: `${adminRoot}/gogo/start`,
+        label: 'menu.meus-agendamentos',
+        to: `${adminRoot}/agendamentos`,
       },
-    ],
-  },
-  {
-    id: 'secondmenu',
-    icon: 'iconsminds-three-arrow-fork',
-    label: 'menu.second-menu',
-    to: `${adminRoot}/second-menu`,
-    // roles: [UserRole.Admin, UserRole.Editor],
-    subs: [
       {
-        icon: 'simple-icon-paper-plane',
-        label: 'menu.second',
-        to: `${adminRoot}/second-menu/second`,
+        label: 'dashboards.calendar',
+        to: `${adminRoot}/agendamentos/calendario`,
       },
     ],
   },
   {
     id: 'blankpage',
-    icon: 'iconsminds-bucket',
-    label: 'menu.blank-page',
-    to: `${adminRoot}/blank-page`,
+    icon: 'iconsminds-yes',
+    label: 'menu.novo-agendamento',
+    to: `${adminRoot}/agendamentos/novo`,
   },
   {
-    id: 'docs',
-    icon: 'iconsminds-library',
-    label: 'menu.docs',
-    to: 'https://gogo-react-docs.coloredstrategies.com/',
-    newWindow: true,
+    id: 'perfil',
+    icon: 'iconsminds-profile',
+    label: 'menu.meu-perfil',
+    to: `${adminRoot}/meu-perfil`,
+    role: ['adm', 'teste'],
   },
+  {
+    id: 'colaboradores',
+    icon: 'iconsminds-business-mens',
+    label: 'menu.colaboradores',
+    to: `${adminRoot}/colaboradores`,
+    role: ['adm'],
+  },
+
 ];
 export default data;

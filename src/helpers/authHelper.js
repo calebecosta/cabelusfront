@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { getCurrentUser } from './Utils';
@@ -12,25 +13,18 @@ const ProtectedRoute = ({
     if (isAuthGuardActive) {
       const currentUser = getCurrentUser();
       if (currentUser) {
-        if (roles) {
-          if (roles.includes(currentUser.role)) {
-            return <Component {...props} />;
-          }
-          return (
-            <Redirect
-              to={{
-                pathname: '/unauthorized',
-                state: { from: props.location },
-              }}
-            />
-          );
+        const permissoes = [];
+        if (currentUser.grupo) {
+          currentUser.grupo.funcoes.forEach((permissao) => {
+            permissoes.push(permissao.id);
+          });
         }
         return <Component {...props} />;
       }
       return (
         <Redirect
           to={{
-            pathname: '/user/login',
+            pathname: '/login',
             state: { from: props.location },
           }}
         />
@@ -41,6 +35,9 @@ const ProtectedRoute = ({
 
   return <Route {...rest} render={setComponent} />;
 };
+const UserRole = {
+  Admin: 0,
+  Editor: 1,
+};
 
-// eslint-disable-next-line import/prefer-default-export
-export { ProtectedRoute };
+export { ProtectedRoute, UserRole };

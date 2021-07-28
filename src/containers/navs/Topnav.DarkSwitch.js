@@ -42,7 +42,7 @@ const TopnavDarkSwitch = () => {
         target="tooltip_switch"
         toggle={() => setTooltipOpen(!tooltipOpen)}
       >
-        Dark Mode
+        Modo Escuro
       </Tooltip>
     </div>
   );

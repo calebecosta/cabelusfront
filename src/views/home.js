@@ -303,14 +303,14 @@ const Home = () => {
             <div className="separator" />
           </li>
           <li className="nav-item text-center">
-            <a
+            {/* <a
               className="btn btn-outline-primary btn-sm mobile-menu-cta"
               target="_blank"
               rel="noopener noreferrer"
               href={buyUrl}
             >
               BUY
-            </a>
+            </a> */}
           </li>
         </ul>
       </div>

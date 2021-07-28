@@ -367,6 +367,7 @@ class Sidebar extends Component {
                 {menuItems &&
                   this.filteredList(menuItems).map((item) => {
                     return (
+                    
                       <NavItem
                         key={item.id}
                         className={classnames({
@@ -396,6 +397,7 @@ class Sidebar extends Component {
                           </NavLink>
                         )}
                       </NavItem>
+
                     );
                   })}
               </Nav>

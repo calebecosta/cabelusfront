@@ -5,7 +5,7 @@ import { Colxx } from '../common/CustomBootstrap';
 
 const SurveyDetailCard = ({ survey }) => {
   return (
-    <Colxx xxs="12" lg="4" className="mb-4">
+    <Colxx xxs="6" lg="4" className="mb-4">
       <Card className="mb-4">
         <CardBody>
           <p className="list-item-heading mb-4">Summary</p>

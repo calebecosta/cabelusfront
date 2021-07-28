@@ -13,7 +13,6 @@ import { NavLink } from 'react-router-dom';
 
 import IntlMessages from '../../helpers/IntlMessages';
 import { Colxx } from '../../components/common/CustomBootstrap';
-import ThumbnailImage from '../../components/cards/ThumbnailImage';
 import ThumbnailLetters from '../../components/cards/ThumbnailLetters';
 import { adminRoot } from '../../constants/defaultValues';
 
@@ -51,14 +50,7 @@ const UserCardExamples = () => {
 
           <Colxx md="6" sm="6" lg="4" xxs="12">
             <Card className="d-flex flex-row mb-4">
-              <NavLink to={`${adminRoot}/cards`} className="d-flex">
-                <ThumbnailImage
-                  rounded
-                  src="/assets/img/profiles/l-1.jpg"
-                  alt="Card image cap"
-                  className="m-4"
-                />
-              </NavLink>
+              <NavLink to={`${adminRoot}/cards`} className="d-flex" />
               <div className=" d-flex flex-grow-1 min-width-zero">
                 <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                   <div className="min-width-zero">
@@ -108,15 +100,7 @@ const UserCardExamples = () => {
 
           <Colxx md="6" sm="6" lg="4" xxs="12">
             <Card className="d-flex flex-row mb-4">
-              <NavLink to={`${adminRoot}/cards`} className="d-flex">
-                <ThumbnailImage
-                  rounded
-                  small
-                  src="/assets/img/profiles/l-1.jpg"
-                  alt="profile"
-                  className="m-4"
-                />
-              </NavLink>
+              <NavLink to={`${adminRoot}/cards`} className="d-flex" />
               <div className=" d-flex flex-grow-1 min-width-zero">
                 <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                   <div className="min-width-zero">
