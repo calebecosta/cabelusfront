@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "chart.js": "2.9.4",
     "classnames": "2.2.6",
+    "date-fns": "^2.23.0",
     "firebase": "^8.2.2",
     "formik": "^2.2.6",
     "moment": "2.29.1",

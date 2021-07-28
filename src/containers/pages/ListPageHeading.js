@@ -58,7 +58,7 @@ const ListPageHeading = ({
               className="top-right-button"
               href="form"
             >
-              <IntlMessages id="pages.add-new-ponto-mergulho" />
+              <IntlMessages id="pages.add-novo-agendamento" />
             </Button>
             {'  '}
           </div>

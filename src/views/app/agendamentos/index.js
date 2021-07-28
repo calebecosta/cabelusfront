@@ -5,7 +5,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 const ListMergulhador = React.lazy(() => import('./list'));
 
 const Form = React.lazy(() => import('./form'));
-const NovoAgendamento = React.lazy(() => import('./novo'));
 const Calendario = React.lazy(() => import('./calendario'));
 
 const Usuarios = ({ match }) => (
@@ -17,16 +16,8 @@ const Usuarios = ({ match }) => (
         render={(props) => <ListMergulhador {...props} />}
       />
       <Route
-        path={`${match.url}/form/`}
-        render={(props) => <Form {...props} />}
-      />
-      <Route
         path={`${match.url}/form/:id?`}
         render={(props) => <Form {...props} />}
-      />
-      <Route
-        path={`${match.url}/novo`}
-        render={(props) => <NovoAgendamento {...props} />}
       />
       <Route
         path={`${match.url}/calendario`}

@@ -119,7 +119,7 @@ const FormStand = ({ match, intl }) => {
       </Modal>
       <div className="disable-text-selection">
         <ListPageHeading
-          heading="menu.pontos-mergulho"
+          heading="menu.agendamentos"
           displayMode={displayMode}
           changeDisplayMode={setDisplayMode}
           handleChangeSelectAll={handleChangeSelectAll}
@@ -140,13 +140,6 @@ const FormStand = ({ match, intl }) => {
           toggleModal={() => setModalOpen(!modalOpen)}
         />
         </div>
-
-      <Row>
-        <Colxx xxs="12">
-          <h1>Meus Agendamentos</h1>
-          <Separator className="mb-5" />
-        </Colxx>
-      </Row>
       <Row>
         {agendamentos.map((itemData) => {
           return (
