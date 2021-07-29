@@ -4,8 +4,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import DatePicker,{registerLocale} from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'moment/locale/pt-br';
+import moment from 'moment';
 import pt from "date-fns/locale/pt-BR";
+import setHours from 'date-fns/setHours'
+import parseIso from 'date-fns/parseISO'
+import setMinutes from 'date-fns/setMinutes'
 
 
 import {
@@ -51,6 +54,7 @@ import api from '../../../services/api';
 
 
 registerLocale("pt", pt)
+moment.locale('pt') 
 
 const FormPontoMergulho = ({ match, intl }) => {
    const [loading, setLoading] = useState(false);
@@ -75,7 +79,7 @@ const FormPontoMergulho = ({ match, intl }) => {
   const [colaboradorSelected, setColaboradorSelected] = useState([]);
   const [clienteSelected, setClienteSelected] = useState([]);
   
-  const [dt_inicio, setDtInicio] = useState(new Date().getTime());
+  const [dt_inicio, setDtInicio] = useState('');
   const [dt_fim, setDtFim] = useState('');
   const [nome_colaborador, setNomeColaborador] = useState('');
   const [clientes, setClientes] = useState([]);
@@ -171,7 +175,8 @@ const FormPontoMergulho = ({ match, intl }) => {
             setNomeCliente(agendamento.clientes.nome || '');
             setNomeColaborador(agendamento.colaboradores.nome || '');
             setColaboradorId(agendamento.colaboradores.id || '');
-            setDataAgendamento(agendamento.data || '');
+            setDtInicio(moment(moment(agendamento.data)).toDate() || '');
+            console.log(moment(moment(agendamento.data).format( "MMMM d, yyyy HH:mm" )).toDate())
             setObservacao(agendamento.observacao || '');
             if (agendamento.colaboradores) {
                 setEmailColaborador(agendamento.colaboradores.email);
@@ -420,11 +425,15 @@ const FormPontoMergulho = ({ match, intl }) => {
                         <DatePicker
                           showTimeSelect
                           locale='pt'
-                          dateFormat="MMMM d, yyyy h:mm aa"
+                          dateFormat="dd/MM/yyyy HH:mm"
+                          minDate={moment().toDate()}
+                          minTime={setHours(setMinutes(new Date(), 0), 8)}
+                          maxTime={setHours(setMinutes(new Date(), 30), 18)}
+                          timeIntervals={60}
                           filterDate={isWeekday}
                           filterTime={filterPassedTime}
                           selected={dt_inicio}
-                          onChange={setDtInicio}
+                          onChange={(e)=>{setDtInicio(e)}}
                           placeholderText="Selecione uma data"
                         />
                       </FormGroup>
