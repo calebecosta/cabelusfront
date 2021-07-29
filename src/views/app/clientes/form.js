@@ -27,12 +27,13 @@ const FormPontoMergulho = ({ match, intl }) => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [id, setId] = useState('');
-  const [nome, setNomeColaborador] = useState('');
-  const [email, setEmailColaborador] = useState('');
+  const [nome, setNomeCliente] = useState('');
+  const [email, setEmailCliente] = useState('');
+  const [endereco, setEndereco] = useState('');
   const [Oldpassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordAgain, setPasswordAgain] = useState('');
-  const [isColaborador, setIsColaborador] = useState(false);
+  const [isCliente, setIsCliente] = useState(false);
   const [colSize, setColSize] = useState(6);
   
 
@@ -42,24 +43,27 @@ const FormPontoMergulho = ({ match, intl }) => {
     if (nome === '') {
       continuar = false;
     }
+
+
     return continuar;
   }
 
   useEffect(() => {
     async function getData(colaborador_id) {
       try {
-        const response = await api.get(`/colaborador/${colaborador_id}`);
+        const response = await api.get(`/cliente/${colaborador_id}`);
         const { error } = response.data;
 
         if (error === undefined) {
-          const colaborador = response.data;
-          setNomeColaborador(colaborador.nome || '');
-          setEmailColaborador(colaborador.email || '');
+          const cliente = response.data;
+          setNomeCliente(cliente.nome || '');
+          setEmailCliente(cliente.email || '');
+          setEndereco(cliente.endereco || '');
         }
       } catch (err) {
         console.log(err);
         alert(
-          'Tivemos um problema para listar este colaborador',
+          'Tivemos um problema para listar este cliente',
           3000,
           'danger'
         );
@@ -68,7 +72,7 @@ const FormPontoMergulho = ({ match, intl }) => {
     }
 
     if (match.params.id) {
-      setIsColaborador(true);
+      setIsCliente(true);
       setColSize(3);
       setId(match.params.id);
       getData(match.params.id);
@@ -79,11 +83,11 @@ const FormPontoMergulho = ({ match, intl }) => {
 
   const update = (obj) => {
     try {
-      api.put(`/colaborador/${id}`, obj).then((response) => {
+      api.put(`/cliente/${id}`, obj).then((response) => {
         const { error } = response.data;
 
         if (error === undefined) {
-          alert('Colaborador editado com sucesso!', 2000, 'success');
+          alert('Cliente editado com sucesso!', 2000, 'success');
           setTimeout(() => {
             window.location.reload();
           }, 600);
@@ -99,13 +103,13 @@ const FormPontoMergulho = ({ match, intl }) => {
 
   const insert = (obj) => {
     try {
-      api.post(`/colaborador/`, obj).then((response) => {
+      api.post(`/cliente/`, obj).then((response) => {
         const { error } = response.data;
 
         if (error === undefined) {
-          alert('Colaborador cadastrado com sucesso', 2000, 'success');
+          alert('Cliente cadastrado com sucesso', 2000, 'success');
           setTimeout(() => {
-            window.location = `/app/colaboradores`;
+            window.location = `/app/clientes`;
           }, 1000);
         } else {
             setLoading(false);
@@ -118,11 +122,10 @@ const FormPontoMergulho = ({ match, intl }) => {
   };
 
 
-
-
   const handleSubmit = (e) => {
     const obj = {
       nome : nome,
+      endereco : endereco,
       email: email,
       senhaAntiga: Oldpassword || undefined,
       senha: password || undefined,
@@ -156,7 +159,7 @@ const FormPontoMergulho = ({ match, intl }) => {
     <>
       <Row>
         <Colxx xxs="12">
-          <Breadcrumb heading="menu.novo-colaborador" match={match} />
+          <Breadcrumb heading="menu.novo-cliente" match={match} />
           <Nav tabs className="separator-tabs ml-0 mb-5" />
 
         </Colxx>
@@ -170,13 +173,13 @@ const FormPontoMergulho = ({ match, intl }) => {
                 <FormGroup row>
                   <Colxx sm={6}>
                     <FormGroup>
-                    <Label for="nome_cliente">Nome</Label>
+                    <Label for="nome">Nome</Label>
                       <Input
                        
                         type="text"
-                        name="razao_social"
+                        name="nome"
                         id="razao"
-                        onChange={(e) => setNomeColaborador(e.target.value)}
+                        onChange={(e) => setNomeCliente(e.target.value)}
                         value={nome}
                       />
                     </FormGroup>
@@ -186,17 +189,29 @@ const FormPontoMergulho = ({ match, intl }) => {
                     <FormGroup>
                     <Label for="email">Email</Label>
                       <Input
-                       
                         type="text"
                         name="email"
                         id="email"
-                        onChange={(e) => setEmailColaborador(e.target.value)}
+                        onChange={(e) => setEmailCliente(e.target.value)}
                         value={email}
                       />
                     </FormGroup>
                   </Colxx>
 
-                  {isColaborador && (
+                  <Colxx sm={12}>
+                    <FormGroup>
+                    <Label for="email">Endereço</Label>
+                      <Input
+                        type="text"
+                        name="email"
+                        id="email"
+                        onChange={(e) => setEndereco(e.target.value)}
+                        value={endereco}
+                      />
+                    </FormGroup>
+                  </Colxx>
+
+                  {isCliente && (
                   <Colxx sm={6}>
                     <FormGroup>
                       <Label for="old-password">
@@ -252,6 +267,9 @@ const FormPontoMergulho = ({ match, intl }) => {
                         requiredField('Confirme a nova senha')}
                     </FormGroup>
                   </Colxx>
+
+          
+
                 </FormGroup>
                     <Button onClick={handleSubmit} className={`float-right btn-multiple-state ${loading ? 'show-spinner' : ''}`} size="lg" color="primary" disabled={loading}>
                     <span className="spinner d-inline-block">

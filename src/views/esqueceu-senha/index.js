@@ -33,6 +33,7 @@ const EsqueceuSenha = () => {
   const [email] = useState("");
   const [showError, setShowError] = useState(false);
   const [errorApi, setErrorApi] = useState("");
+  const [successApi, setSuccessApi] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {});
@@ -43,11 +44,12 @@ const EsqueceuSenha = () => {
         setShowError(false);
         setShowSuccess(false);
         try {
-          const response = await api.post(`/esqueci_senha`, {
+          const response = await api.post(`/esqueci-senha`, {
             email: values.email,
           });
           const { error } = response.data;
           if (error === undefined) {
+            setSuccessApi(response.data.success);
             setShowSuccess(true);
             setShowError(false);
           } else {
@@ -90,7 +92,7 @@ const EsqueceuSenha = () => {
                     <Form className="av-tooltip tooltip-label-bottom">
                       {showSuccess && (
                         <Alert color="success">
-                          Email enviado com sucesso!
+                       {successApi}
                         </Alert>
                       )}
                       {showError && <Alert color="danger">{errorApi}</Alert>}

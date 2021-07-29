@@ -9,9 +9,8 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import { injectIntl } from 'react-intl';
-import ListPageHeading from '../../../containers/agendamento/ListPageHeading';
+import ListPageHeading from '../../../containers/cliente/ListPageHeading';
 
-import { alert } from '../../../helpers/Utils';
 import 'react-tagsinput/react-tagsinput.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'rc-switch/assets/index.css';
@@ -19,10 +18,9 @@ import 'rc-slider/assets/index.css';
 import 'react-rater/lib/react-rater.css';
 
 import { Colxx, Separator } from '../../../components/common/CustomBootstrap';
-import UserCardBasic from '../../../containers/agendamento/UserCardBasic';
+import UserCardBasic from '../../../containers/cliente/UserCardBasic';
 
 import api from '../../../services/api';
-import ListPageListing from '../../../containers/agendamento/ListPageListing';
 
 const FormStand = ({ match, intl }) => {
   const [modalBasic, setModalBasic] = useState(false);
@@ -42,20 +40,7 @@ const FormStand = ({ match, intl }) => {
   const [lastChecked, setLastChecked] = useState(null);
 
 
-  const [agendamentos, setAgendamentos] = useState([]);
-
-  const onContextMenuClick = (e, data) => {
-    // params : (e,data,target)
-    console.log('onContextMenuClick - selected items', selectedItems);
-    console.log('onContextMenuClick - action : ', data.action);
-  };
-
-  const onContextMenu = (e, data) => {
-    const clickedProductId = data.data;
-    if (!selectedItems.includes(clickedProductId)) {
-      setSelectedItems([clickedProductId]);
-    }
-  }
+  const [cliente, setAgendamentos] = useState([]);
 
 
   const startIndex =
@@ -80,7 +65,7 @@ const FormStand = ({ match, intl }) => {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await api.get(`/agendamentos`);
+        const response = await api.get(`/cliente`);
 
         const { error } = response.data;
 
@@ -100,35 +85,17 @@ const FormStand = ({ match, intl }) => {
     getData();
   }, [dataApi]);
 
-  const deletarUsuario  = (id)  => {
+  function deletarUsuario(id) {
     setModalBasic(true);
     setDeleteId(id);
   }
 
-  const editAgendamento = (id) => {
-    window.location = `/app/agendamentos/form/${id}`;
-  };
-
   function remover() {
     if (deleteId !== '') {
-
-      try {
-        api.delete(`/agendamentos/${deleteId}`).then((response) => {
-          const { error } = response.data;
-  
-          if (error === undefined) {
-            setDataApi(!dataApi);
-            setModalBasic(false);
-            alert('Agendamento excluído com sucesso!', 2000, 'success');
-          } else {
-            setModalBasic(false)
-            alert(response.data.error, 3000, 'danger');
-          }
-        });
-      } catch (error) {
-        alert('Ops... Estamos passando por uma instabilidade..', 3000, 'danger');
-      }
-
+      api.delete(`/cliente/${deleteId}`).then((i) => {
+        setDataApi(!dataApi);
+        setModalBasic(false);
+      });
     }
   }
 
@@ -140,7 +107,7 @@ const FormStand = ({ match, intl }) => {
         <ModalHeader>
           <i className="simple-icon-exclamation" /> Confirmação
         </ModalHeader>
-        <ModalBody>Tem certeza que deseja remover este Agendamento?</ModalBody>
+        <ModalBody>Tem certeza que deseja remover este Cliente?</ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={() => remover()}>
             Sim, com certeza
@@ -152,7 +119,7 @@ const FormStand = ({ match, intl }) => {
       </Modal>
       <div className="disable-text-selection">
         <ListPageHeading
-          heading="menu.agendamentos"
+          heading="menu.clientes"
           displayMode={displayMode}
           changeDisplayMode={setDisplayMode}
           handleChangeSelectAll={handleChangeSelectAll}
@@ -173,19 +140,15 @@ const FormStand = ({ match, intl }) => {
           toggleModal={() => setModalOpen(!modalOpen)}
         />
         </div>
-
-      <ListPageListing
-          items={agendamentos}
-          displayMode={displayMode}
-          selectedItems={selectedItems}
-          currentPage={currentPage}
-          totalPage={totalPage}
-          onContextMenuClick={onContextMenuClick}
-          deleteCallback={deletarUsuario}
-          editCallback={editAgendamento}
-          onContextMenu={onContextMenu}
-          onChangePage={setCurrentPage}
-        />
+      <Row>
+        {cliente.map((itemData) => {
+          return (
+            <Colxx xxs="12" md="6" lg="4" key={`friend_${itemData.id}`}>
+              <UserCardBasic  data={itemData} deleteCallback={deletarUsuario} />
+            </Colxx>
+          );
+        })}
+      </Row>
     </>
   );
 };

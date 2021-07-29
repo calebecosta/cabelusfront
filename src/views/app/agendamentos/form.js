@@ -61,21 +61,25 @@ const FormPontoMergulho = ({ match, intl }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [modalBasic, setModalBasic] = useState(false);
   const [preview, setPreview] = useState('');
-  const [colaboradores, setColaboradores] = useState([]);
+
   const { messages } = intl;
 
   const [id, setId] = useState('');
   const [colaborador_id, setColaboradorId] = useState('');
   const [nome, setNome] = useState('');
   const [nome_cliente, setNomeCliente] = useState('');
-  const [nome_colaborador, setNomeColaborador] = useState('');
+
   const [email, setEmailColaborador] = useState('');
   const [data, setDataAgendamento] = useState('');
   const [observacao, setObservacao] = useState('');
   const [colaboradorSelected, setColaboradorSelected] = useState([]);
+  const [clienteSelected, setClienteSelected] = useState([]);
+  
   const [dt_inicio, setDtInicio] = useState(new Date().getTime());
   const [dt_fim, setDtFim] = useState('');
-  
+  const [nome_colaborador, setNomeColaborador] = useState('');
+  const [clientes, setClientes] = useState([]);
+  const [colaboradores, setColaboradores] = useState([]);
   
   
 
@@ -177,6 +181,13 @@ const FormPontoMergulho = ({ match, intl }) => {
                   key: agendamento.colaboradores.id,
                 });
               }
+            if (agendamento.clientes) {
+                setClienteSelected({
+                  label: agendamento.colaboradores.nome,
+                  value: agendamento.colaboradores.id,
+                  key: agendamento.colaboradores.id,
+                });
+              }
   
         }
       } catch (err) {
@@ -215,6 +226,31 @@ const FormPontoMergulho = ({ match, intl }) => {
             };
           });
           setColaboradores(colaboradorFormated);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await api.get(`/cliente`);
+
+        const { error } = response.data;
+
+        if (error === undefined) {
+          const clientesFormated = response.data.map((sta) => {
+            return {
+              label: sta.nome,
+              value: sta.id,
+              key: sta.id,
+            };
+          });
+          setClientes(clientesFormated);
         }
       } catch (err) {
         console.log(err);
@@ -343,20 +379,23 @@ const FormPontoMergulho = ({ match, intl }) => {
             <CardBody>
               <Form>
                 <FormGroup row>
-                  <Colxx sm={6}>
+                <Colxx sm={6}>
                     <FormGroup>
-                    <Label for="nome_cliente">Nome do Cliente</Label>
-                      <Input
-                        disabled={isAgendamento}
-                        type="text"
-                        name="razao_social"
-                        id="razao"
-                        onChange={(e) => setNomeCliente(e.target.value)}
-                        value={nome_cliente}
+                    <Label for="colaborador">Cliente</Label>
+                      <Select
+                       
+                        components={{ Input: CustomSelectInput }}
+                        className="react-select"
+                        classNamePrefix="react-select"
+                        name="category"
+                        placeholder="Selecione..."
+                        defaultValue={clienteSelected}
+                        value={clienteSelected}
+                        onChange={setClienteSelected}
+                        options={clientes}
                       />
                     </FormGroup>
                   </Colxx>
-
                   <Colxx sm={6}>
                     <FormGroup>
                     <Label for="colaborador">Colaborador</Label>

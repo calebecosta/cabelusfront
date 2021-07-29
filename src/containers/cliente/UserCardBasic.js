@@ -4,10 +4,6 @@ import { Button, Card, CardBody, CardSubtitle, CardText } from 'reactstrap';
 import ThumbnailImage from './ThumbnailImage';
 
 const UserCardBasic = ({ link = '#', data, deleteCallback }) => {
-
-  const nome_cliente = (data.clientes !== null ? data.clientes.nome : '')
-  const nome_colaborador = ( data.colaboradores !== null  ? data.colaboradores.nome : '')
-  const { id = '' } = data.id
   return (
     <Card className="d-flex flex-row mb-4">
       <a
@@ -24,11 +20,11 @@ const UserCardBasic = ({ link = '#', data, deleteCallback }) => {
       >
         <div className="glyph-icon simple-icon-trash" />
       </a>
-      <NavLink to={`/app/agendamentos/form/${id}`} className="d-flex">
+      <NavLink to={`/app/clientes/form/${data.id}`} className="d-flex">
         <ThumbnailImage
           rounded
-          src={`https://ui-avatars.com/api/?name=${nome_cliente}`} 
-          alt={data.nome ? data.nome : '' }
+          src={`https://ui-avatars.com/api/?name=${data.nome}`} 
+          alt={data.nome}
           className="m-4"
         />
       </NavLink>
@@ -36,15 +32,13 @@ const UserCardBasic = ({ link = '#', data, deleteCallback }) => {
         
         <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
           <div className="min-width-zero">
-        
-            <CardSubtitle  className="truncate mb-1"> Agendado por : {nome_cliente}</CardSubtitle>
-            <CardSubtitle  className="truncate mb-1">Colaborador : {nome_colaborador}</CardSubtitle>
-            <CardSubtitle  className="truncate mb-1">Dt. Agendamento {data.data}</CardSubtitle>
+       
+            <CardSubtitle  className="truncate mb-1">{data.nome}</CardSubtitle>
  
             <CardText className="text-muted text-small mb-2">
               {data.email}
             </CardText>
-            <NavLink to={`/app/agendamentos/form/${data.id}`}>
+            <NavLink to={`/app/clientes/form/${data.id}`}>
               <Button outline size="xs" color="primary">
                 Visualizar
               </Button>

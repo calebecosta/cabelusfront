@@ -15,6 +15,9 @@ const Agendamento = React.lazy(() =>
 const Colaborador = React.lazy(() =>
   import(/* webpackChunkName: "viwes-gogo" */ './colaboradores')
 );
+const Clientes = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './clientes')
+);
 
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "viwes-blank-page" */ './blank-page')
@@ -39,6 +42,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/colaboradores`}
               render={(props) => <Colaborador {...props} />}
+            />
+            <Route
+              path={`${match.url}/clientes`}
+              render={(props) => <Clientes {...props} />}
             />
         
             {/* <ProtectedRoute

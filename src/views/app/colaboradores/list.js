@@ -8,8 +8,8 @@ import {
   ModalBody,
   ModalFooter,
 } from 'reactstrap';
-
 import { injectIntl } from 'react-intl';
+import ListPageHeading from '../../../containers/colaborador/ListPageHeading';
 
 import 'react-tagsinput/react-tagsinput.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -27,8 +27,40 @@ const FormStand = ({ match, intl }) => {
   const [deleteId, setDeleteId] = useState('');
   const [dataApi, setDataApi] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [displayMode, setDisplayMode] = useState('thumblist');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedPageSize, setSelectedPageSize] = useState(8);
 
-  const [agendamentos, setAgendamentos] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [totalItemCount, setTotalItemCount] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [items, setItems] = useState([]);
+  const [lastChecked, setLastChecked] = useState(null);
+
+
+  const [colaborador, setAgendamentos] = useState([]);
+
+
+  const startIndex =
+    currentPage === 1 ? 1 : (currentPage - 1) * selectedPageSize;
+  const endIndex = currentPage * selectedPageSize;
+
+  const pageSizes = [8, 12, 20];
+
+  const handleChangeSelectAll = (isToggle) => {
+    if (selectedItems.length >= items.length) {
+      if (isToggle) {
+        setSelectedItems([]);
+      }
+    } else {
+      setSelectedItems(items.map((x) => x.id));
+    }
+    document.activeElement.blur();
+    return false;
+  };
+
 
   useEffect(() => {
     async function getData() {
@@ -75,7 +107,7 @@ const FormStand = ({ match, intl }) => {
         <ModalHeader>
           <i className="simple-icon-exclamation" /> Confirmação
         </ModalHeader>
-        <ModalBody>Tem certeza que deseja remover este Agendamento?</ModalBody>
+        <ModalBody>Tem certeza que deseja remover este Colaborador?</ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={() => remover()}>
             Sim, com certeza
@@ -85,17 +117,34 @@ const FormStand = ({ match, intl }) => {
           </Button>
         </ModalFooter>
       </Modal>
+      <div className="disable-text-selection">
+        <ListPageHeading
+          heading="menu.colaboradores"
+          displayMode={displayMode}
+          changeDisplayMode={setDisplayMode}
+          handleChangeSelectAll={handleChangeSelectAll}
+          changePageSize={setSelectedPageSize}
+          selectedPageSize={selectedPageSize}
+          totalItemCount={totalItemCount}
+          match={match}
+          startIndex={startIndex}
+          endIndex={endIndex}
+          selectedItemsLength={selectedItems ? selectedItems.length : 0}
+          itemsLength={items ? items.length : 0}
+          onSearchKey={(e) => {
+            if (e.key === 'Enter') {
+              setSearch(e.target.value.toLowerCase());
+            }
+          }}
+          pageSizes={pageSizes}
+          toggleModal={() => setModalOpen(!modalOpen)}
+        />
+        </div>
       <Row>
-        <Colxx xxs="12">
-          <h1>Colaboradores</h1>
-          <Separator className="mb-5" />
-        </Colxx>
-      </Row>
-      <Row>
-        {agendamentos.map((itemData) => {
+        {colaborador.map((itemData) => {
           return (
             <Colxx xxs="12" md="6" lg="4" key={`friend_${itemData.id}`}>
-              <UserCardBasic survey={itemData} data={itemData} deleteCallback={deletarUsuario} />
+              <UserCardBasic  data={itemData} deleteCallback={deletarUsuario} />
             </Colxx>
           );
         })}
