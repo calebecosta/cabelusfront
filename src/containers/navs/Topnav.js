@@ -282,7 +282,7 @@ const TopNav = ({
         </div>
       </div>
       <NavLink className="navbar-logo" to={adminRoot}>
-        <span className="logo d-none d-xs-block" />
+        <h1>CABELUS</h1>
         <span className="logo-mobile d-block d-xs-none" />
       </NavLink>
 

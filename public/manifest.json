@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Cabelus",
+  "name": "Cabelus - Agende sua visita ao nosso salão.",
   "icons": [
     {
       "src": "favicon.ico",

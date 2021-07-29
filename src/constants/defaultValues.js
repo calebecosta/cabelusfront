@@ -51,7 +51,7 @@ export const currentUser = {
 
 export const themeColorStorageKey = '__theme_selected_color';
 export const isMultiColorActive = true;
-export const defaultColor = 'light.greenlime';
+export const defaultColor = 'light.redruby';
 export const isDarkSwitchActive = true;
 export const defaultDirection = 'ltr';
 export const themeRadiusStorageKey = '__theme_radius';

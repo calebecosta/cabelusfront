@@ -18,6 +18,10 @@ module.exports = {
 
   /* 02.User Login, Logout, Register */
   'user.login-title': 'Login',
+  'user.cadastro': 'Cadastro',
+  'user.cadastrar': 'CADASTRAR',
+  'user.nome': 'Nome Completo',
+  'user.endereco': 'Endereço',
   'user.register': 'Register',
   'user.forgot-password': 'Forgot Password',
   'user.email': 'E-mail',

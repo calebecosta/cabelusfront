@@ -112,6 +112,7 @@ const Login = () => {
               </div>
               <div className="form-side">
                 <NavLink to="/" className="white">
+                  <h1 style={{'color':"black", "text-align":"center"}}> CABELUS</h1>
                   {/* <span className="logo-single" /> */}
                 </NavLink>
 

@@ -5,8 +5,8 @@
 
   .image-side {
     width: 40%;
-    background: url('/assets/img/login/balloon.jpg') no-repeat center top;
-    background-size: cover;
+    background: url('/assets/img/login/pole.png') no-repeat center top;
+    background-size: contain;
     padding: 80px 40px;
 
     .h3 {
@@ -17,6 +17,10 @@
   .form-side {
     width: 60%;
     padding: 80px;
+  }
+  .form-side-cadastro {
+    width: 60%;
+    padding: 120px;
   }
 
   @include respond-below(md) {
@@ -30,6 +34,80 @@
     .form-side {
       width: 100%;
       padding: 60px;
+    }
+    .form-side-cadastro {
+      width: 100%;
+      padding: 80px;
+    }
+  }
+
+  @include respond-below(sm) {
+    p.h2 {
+      font-size: 1.6rem;
+    }
+  }
+
+  @include respond-below(xs) {
+    flex-direction: column;
+
+    .image-side {
+      padding: 35px 30px;
+    }
+
+    .form-side {
+      padding: 35px 30px;
+    }
+
+    .logo-single {
+      margin-bottom: 20px;
+    }
+
+    p.h2 {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.auth-card-cadastro {
+  display: flex;
+  flex-direction: row;
+  @include depth(1);
+
+  .image-side {
+    width: 40%;
+    background: url('/assets/img/login/balloon.jpg') no-repeat center top;
+    background-size: cover;
+    padding: 80px 40px;
+
+    .h3 {
+      line-height: 0.8rem;
+    }
+  }
+
+  .form-side {
+    width: 60%;
+    padding: 80px;
+  }
+  .form-side-cadastro {
+    width: 100%;
+    padding: 110px;
+  }
+
+  @include respond-below(md) {
+    flex-direction: column;
+
+    .image-side {
+      width: 100%;
+      padding: 60px;
+    }
+
+    .form-side {
+      width: 100%;
+      padding: 60px;
+    }
+    .form-side-cadastro {
+      width: 100%;
+      padding: 80px;
     }
   }
 

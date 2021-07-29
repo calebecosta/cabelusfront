@@ -34,6 +34,9 @@ const ViewUnauthorized = React.lazy(() =>
 const ViewLogin = React.lazy(() =>
   import(/* webpackChunkName: "views-error" */ "./views/login")
 );
+const ViewCadastro = React.lazy(() =>
+  import(/* webpackChunkName: "views-error" */ "./views/cadastro")
+);
 const ViewEsqueceuSenha = React.lazy(() =>
   import(/* webpackChunkName: "views-user" */ './views/esqueceu-senha')
 );
@@ -82,6 +85,10 @@ class App extends React.Component {
                   <Route
                     path="/esqueceu-senha"
                     render={(props) => <ViewEsqueceuSenha {...props} />}
+                  />
+                  <Route
+                    path="/cadastro"
+                    render={(props) => <ViewCadastro {...props} />}
                   />
                   <Route
                     path="/unauthorized"

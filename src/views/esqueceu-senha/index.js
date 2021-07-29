@@ -73,19 +73,13 @@ const EsqueceuSenha = () => {
       <Suspense>
         <Row className="h-100">
           <Colxx xxs="12" md="11" className="mx-auto my-auto">
+            
             <Card className="auth-card">
-              <div className="position-relative image-side ">
-                <p className="text-white h2">Perdeu sua senha?</p>
-                <p className="white mb-0">
-                  Tudo bem, problemas acontecem :)
-                  <br />
-                  Você receberá por email um link para escolher a uma nova.
-                </p>
-              </div>
+              <div className="position-relative image-side " />
+              
               <div className="form-side">
-                <NavLink to="/" className="white">
-                  {/* <span className="logo-single" /> */}
-                </NavLink>
+              
+                <NavLink to="/" className="white" />
 
                 <Formik initialValues={initialValues} onSubmit={onSubmit}>
                   {({ errors, touched }) => (
