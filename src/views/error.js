@@ -30,7 +30,7 @@ const Error = () => {
                 </div>
                 <div className="form-side">
                   <NavLink to="/" className="white">
-                    <span className="logo-single" />
+                  <h1 style={{'color':"black", "text-align":"center"}}> CABELUS</h1>
                   </NavLink>
                   <CardTitle className="mb-4">
                     <IntlMessages id="pages.error-title" />

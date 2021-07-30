@@ -7,7 +7,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import pt from "date-fns/locale/pt-BR";
 import setHours from 'date-fns/setHours'
-import parseIso from 'date-fns/parseISO'
 import setMinutes from 'date-fns/setMinutes'
 
 
@@ -20,36 +19,18 @@ import {
   Label,
   Button,
   Form,
-  CustomInput,
-  TabContent,
-  TabPane,
   Nav,
-  NavItem,
-  NavLink,
-  Modal,
-  ModalBody,
-  ModalFooter,
+
 } from 'reactstrap';
 import { injectIntl } from 'react-intl';
-import classnames from 'classnames';
-import ReactQuill from 'react-quill';
+
 import Select from 'react-select';
 
-
-import 'react-tagsinput/react-tagsinput.css';
-
-import 'rc-switch/assets/index.css';
-import 'rc-slider/assets/index.css';
-import 'react-rater/lib/react-rater.css';
-
-import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.bubble.css';
 import { Colxx } from '../../../components/common/CustomBootstrap';
 import Breadcrumb from '../../../containers/navs/Breadcrumb';
 import CustomSelectInput from '../../../components/common/CustomSelectInput';
 import IntlMessages from '../../../helpers/IntlMessages';
 import { alert } from '../../../helpers/Utils';
-import { imgPreview } from '../../../constants/defaultValues';
 import api from '../../../services/api';
 
 
@@ -60,11 +41,7 @@ const FormPontoMergulho = ({ match, intl }) => {
    const [loading, setLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAgendamento, setIsAgendamento] = useState(false);
-  const [activeTab, setActiveTab] = useState('pt');
-  const [msgError, setMsgError] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [modalBasic, setModalBasic] = useState(false);
-  const [preview, setPreview] = useState('');
 
   const { messages } = intl;
 
@@ -74,17 +51,15 @@ const FormPontoMergulho = ({ match, intl }) => {
   const [nome_cliente, setNomeCliente] = useState('');
 
   const [email, setEmailColaborador] = useState('');
-  const [data, setDataAgendamento] = useState('');
   const [observacao, setObservacao] = useState('');
   const [colaboradorSelected, setColaboradorSelected] = useState([]);
   const [clienteSelected, setClienteSelected] = useState([]);
   
   const [dt_inicio, setDtInicio] = useState('');
-  const [dt_fim, setDtFim] = useState('');
   const [nome_colaborador, setNomeColaborador] = useState('');
   const [clientes, setClientes] = useState([]);
   const [colaboradores, setColaboradores] = useState([]);
-  
+  const [option,setOption] = useState('');
   
 
   const quillModules = {
@@ -176,7 +151,6 @@ const FormPontoMergulho = ({ match, intl }) => {
             setNomeColaborador(agendamento.colaboradores.nome || '');
             setColaboradorId(agendamento.colaboradores.id || '');
             setDtInicio(moment(moment(agendamento.data)).toDate() || '');
-            console.log(moment(moment(agendamento.data).format( "MMMM d, yyyy HH:mm" )).toDate())
             setObservacao(agendamento.observacao || '');
             if (agendamento.colaboradores) {
                 setEmailColaborador(agendamento.colaboradores.email);
@@ -211,6 +185,7 @@ const FormPontoMergulho = ({ match, intl }) => {
       setId(match.params.id);
       getData(match.params.id);
       setIsAgendamento(true);
+      setOption('disabled');
     }
     setIsLoaded(true);
   }, []);
@@ -423,6 +398,8 @@ const FormPontoMergulho = ({ match, intl }) => {
                       <FormGroup>
                       <Label for="colaborador">Data de Agendamento</Label>
                         <DatePicker
+                         disabled={option}
+                          onChangeRaw={(e)=> e.preventDefault()}
                           showTimeSelect
                           locale='pt'
                           dateFormat="dd/MM/yyyy HH:mm"
@@ -439,19 +416,6 @@ const FormPontoMergulho = ({ match, intl }) => {
                       </FormGroup>
                     </Colxx>
 
-                  {/* <Colxx sm={6}>
-                    <FormGroup>
-                      <Label for="data">Dt. Agendamento</Label>
-                      <Input
-                        disabled={isAgendamento}
-                        type="text"
-                        name="data"
-                        id="data"
-                        onChange={(e) => setDataAgendamento(new Date().toISOString())}
-                        value={ new Date().toISOString()}
-                      />
-                    </FormGroup>
-                  </Colxx> */}
                     {isAgendamento && ( 
                   <Colxx sm={6}>
                     <FormGroup>

@@ -37,7 +37,7 @@ const CalendarToolbar = (toolbar) => {
             className="btn btn-primary calendar-today-btn mr-2"
             onClick={goToCurrent}
           >
-            Today
+            Hoje
           </button>
           <button
             type="button"

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { ContextMenuTrigger } from 'react-contextmenu';
 import { Colxx } from '../../components/common/CustomBootstrap';
 
+moment.locale('pt') 
 const DataListView = ({
   agendamento,
   isSelect,
@@ -16,9 +17,9 @@ const DataListView = ({
 }) => {
   const nome_cliente = (agendamento.clientes !== null ? agendamento.clientes.nome : '')
   const nome_colaborador = ( agendamento.colaboradores !== null  ? agendamento.colaboradores.nome : '')
-  const data = ( agendamento.data !== null  ? moment(agendamento.data ,'YYYY-MM-DD').utc().format("DD/MM/YYYY HH:mm:ss") : '')
-  const { id = '' } = agendamento.id
-  
+  const data = ( agendamento.data !== null  ? moment(moment(agendamento.data)).format("DD/MM/YYYY HH:mm")  : '')
+  const { id = '' } = agendamento.id          
+    
   return (
     <Colxx xxs="12" className="mb-3">
       <ContextMenuTrigger id="menu_id" data={agendamento.id} collect={collect}>

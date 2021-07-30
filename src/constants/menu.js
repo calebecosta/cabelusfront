@@ -19,6 +19,13 @@ const data = [
     // ],
   },
   {
+    id: 'dashboard',
+    icon: 'iconsminds-dashboard',
+    label: 'menu.dashboard',
+    to: `${adminRoot}/dashboard`,
+    role: ['adm', 'col', 'cli'],
+  },
+  {
     id: 'colaboradores',
     icon: 'iconsminds-business-mens',
     label: 'menu.colaboradores',
@@ -39,6 +46,12 @@ const data = [
     to: `${adminRoot}/meu-perfil`,
     role: ['adm', 'col', 'cli'],
   },
-
+  {
+    id: 'calendar',
+    icon: 'iconsminds-calendar-4',
+    label: 'menu.calendar',
+    to: `${adminRoot}/agendamentos/calendario`,
+    role: ['adm', 'col', 'cli'],
+  },
 ];
 export default data;

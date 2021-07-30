@@ -45,6 +45,7 @@ module.exports = {
   'menu.gogo': 'Gogo',
   'menu.novo' : 'Novo',
   'menu.meu-perfil':'Meu Perfil',
+  'menu.dashboard' : 'Dashboard',
   'menu.meus-agendamentos':'Meus agendamentos',
   'menu.usuario': 'Usuarios',
   'menu.start': 'Start',
@@ -74,8 +75,15 @@ module.exports = {
   'menu.blank-page': 'Blank Page',
   'menu.form' : 'Form',
   /* 04.Error Page */
-  'pages.error-title': 'Ooops... looks like an error occurred!',
-  'pages.error-code': 'Error code',
-  'pages.go-back-home': 'GO BACK HOME',
+  'pages.error-title': 'Ooops... tivemos um erro por aqui!',
+  'pages.error-code': 'Pagina não existe',
+  'pages.go-back-home': 'Voltar',
   'dashboards.calendar': 'Calendário de Agendamentos',
+  'menu.calendar': 'Calendário',
+
+  'dashboards.website-visits': 'Quantidade de Agendamentos',
+  'dashboards.unique-visitors' : 'metricas',
+  'dashboards.this-week' : 'Esta semana',
+  'dashboards.this-month' : 'Este Mes',
+  'dashboards.this-year' : 'Este ano',
 };
