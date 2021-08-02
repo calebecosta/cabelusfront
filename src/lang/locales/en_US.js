@@ -43,6 +43,7 @@ module.exports = {
   'menu.app': 'Home',
   'menu.dashboards': 'Dashboards',
   'menu.gogo': 'Gogo',
+  'menu.servicos': 'Servicos',
   'menu.novo' : 'Novo',
   'menu.meu-perfil':'Meu Perfil',
   'menu.dashboard' : 'Dashboard',
@@ -80,6 +81,8 @@ module.exports = {
   'pages.go-back-home': 'Voltar',
   'dashboards.calendar': 'Calendário de Agendamentos',
   'menu.calendar': 'Calendário',
+  'pages.add-novo-servico' : 'Novo servico',
+  'menu.novo-servico' : 'Serviço',
 
   'dashboards.website-visits': 'Quantidade de Agendamentos',
   'dashboards.unique-visitors' : 'metricas',

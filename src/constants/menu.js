@@ -26,6 +26,13 @@ const data = [
     role: ['adm', 'col', 'cli'],
   },
   {
+    id: 'servicos',
+    icon: 'iconsminds-dashboard',
+    label: 'menu.servicos',
+    to: `${adminRoot}/servicos`,
+    role: ['adm'],
+  },
+  {
     id: 'colaboradores',
     icon: 'iconsminds-business-mens',
     label: 'menu.colaboradores',

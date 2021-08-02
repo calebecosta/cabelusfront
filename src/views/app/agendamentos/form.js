@@ -53,12 +53,14 @@ const FormPontoMergulho = ({ match, intl }) => {
   const [email, setEmailColaborador] = useState('');
   const [observacao, setObservacao] = useState('');
   const [colaboradorSelected, setColaboradorSelected] = useState([]);
+  const [servicoSelected, setServicoSelected] = useState([]);
   const [clienteSelected, setClienteSelected] = useState([]);
   
   const [dt_inicio, setDtInicio] = useState('');
   const [nome_colaborador, setNomeColaborador] = useState('');
   const [clientes, setClientes] = useState([]);
   const [colaboradores, setColaboradores] = useState([]);
+  const [servicos, setServicos] = useState([]);
   const [option,setOption] = useState('');
   
 
@@ -167,6 +169,13 @@ const FormPontoMergulho = ({ match, intl }) => {
                   key: agendamento.colaboradores.id,
                 });
               }
+            if (agendamento.servicos) {
+                setServicoSelected({
+                  label: agendamento.servicos.nome,
+                  value: agendamento.servicos.id,
+                  key: agendamento.servicos.id,
+                });
+              }
   
         }
       } catch (err) {
@@ -231,6 +240,31 @@ const FormPontoMergulho = ({ match, intl }) => {
             };
           });
           setClientes(clientesFormated);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await api.get(`/servico`);
+
+        const { error } = response.data;
+
+        if (error === undefined) {
+          const servicosFormated = response.data.map((serv) => {
+            return {
+              label: serv.nome,
+              value: serv.id,
+              key: serv.id,
+            };
+          });
+          setServicos(servicosFormated);
         }
       } catch (err) {
         console.log(err);
@@ -316,6 +350,7 @@ const FormPontoMergulho = ({ match, intl }) => {
     const obj = {
       nome : nome_cliente,
       colaborador_id : colaboradorSelected.value,
+      servico_id : servicoSelected.value,
       data : dt_inicio,
       observacao : observacao,
     };
@@ -390,6 +425,23 @@ const FormPontoMergulho = ({ match, intl }) => {
                         value={colaboradorSelected}
                         onChange={setColaboradorSelected}
                         options={colaboradores}
+                      />
+                    </FormGroup>
+                  </Colxx>
+                  <Colxx sm={12}>
+                    <FormGroup>
+                    <Label for="colaborador">Tipo de Serviço</Label>
+                      <Select
+                       
+                        components={{ Input: CustomSelectInput }}
+                        className="react-select"
+                        classNamePrefix="react-select"
+                        name="category"
+                        placeholder="Selecione..."
+                        defaultValue={servicoSelected}
+                        value={servicoSelected}
+                        onChange={setServicoSelected}
+                        options={servicos}
                       />
                     </FormGroup>
                   </Colxx>
