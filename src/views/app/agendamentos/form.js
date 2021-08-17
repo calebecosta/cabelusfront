@@ -164,19 +164,20 @@ const FormPontoMergulho = ({ match, intl }) => {
               }
             if (agendamento.clientes) {
                 setClienteSelected({
-                  label: agendamento.colaboradores.nome,
-                  value: agendamento.colaboradores.id,
-                  key: agendamento.colaboradores.id,
+                  label: agendamento.clientes.nome,
+                  value: agendamento.clientes.id,
+                  key: agendamento.clientes.id,
                 });
               }
             if (agendamento.servicos) {
-                setServicoSelected({
-                  label: agendamento.servicos.nome,
-                  value: agendamento.servicos.id,
-                  key: agendamento.servicos.id,
+              agendamento.servicos.map((serv) => {
+                return setServicoSelected({
+                  label: serv.nome,
+                  value: serv.id,
+                  key: serv.id,
                 });
-              }
-  
+              });
+            }
         }
       } catch (err) {
         console.log(err);
@@ -270,7 +271,6 @@ const FormPontoMergulho = ({ match, intl }) => {
         console.log(err);
       }
     }
-
     getData();
   }, []);
 
