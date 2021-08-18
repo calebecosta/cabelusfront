@@ -80,14 +80,7 @@ const Layouts = ({ intl }) => {
                    
                   </div>
                 </Step>
-                <Step
-                  id="step2"
-                  name="Profissional"
-                  desc="Escolha um profissinal"
-                >
-                   <Colaboradores />
-                     
-                </Step>
+
                 <Step
                   id="step3"
                   name="Serviço"
@@ -96,6 +89,16 @@ const Layouts = ({ intl }) => {
                  
                  <Servicos />
                 </Step>
+                
+                <Step
+                  id="step2"
+                  name="Profissional"
+                  desc="Escolha um profissinal"
+                >
+                   <Colaboradores />
+                     
+                </Step>
+                
                 <Step
                   id="step4"
                   name="Data do Agendamento"
