@@ -94,7 +94,7 @@ const Colaboradores = () => {
                     Cabelereiro
                   </p>
                   <div className="w-15 w-sm-100">
-                    <Badge color="secondary" pill>
+                    <Badge color="info" pill>
                     Disponível
                     </Badge>
                   </div>

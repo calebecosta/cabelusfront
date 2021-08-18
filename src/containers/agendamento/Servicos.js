@@ -70,8 +70,8 @@ const Servicos = () => {
                     teste
                   </p>
                   <div className="w-15 w-sm-100">
-                    <Badge color="primary" pill>
-                    teste
+                    <Badge color="success" pill>
+                    R$ {(itemData.valor).toLocaleString('pt-br', {minimumFractionDigits: 2})}
                     </Badge>
                   </div>
                 </div>

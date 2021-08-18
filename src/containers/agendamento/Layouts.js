@@ -70,26 +70,16 @@ const Layouts = ({ intl }) => {
                 topNavClick={topNavClick}
               />
               <Steps>
+               
                 <Step
                   id="step1"
-                  name="Bem vindo"
-                  desc="Olá"
-                >
-                  <div className="wizard-basic-step text-center">
-                    <Jumbotron data={userData}/>
-                   
-                  </div>
-                </Step>
-
-                <Step
-                  id="step3"
                   name="Serviço"
                   desc="Escolha um tipo de serviço"
                 >
                  
                  <Servicos />
                 </Step>
-                
+
                 <Step
                   id="step2"
                   name="Profissional"
@@ -100,7 +90,7 @@ const Layouts = ({ intl }) => {
                 </Step>
                 
                 <Step
-                  id="step4"
+                  id="step3"
                   name="Data do Agendamento"
                   desc="Escolha a data de seu agendamento"
                 >
@@ -108,7 +98,7 @@ const Layouts = ({ intl }) => {
 
                 </Step>
                 <Step
-                  id="step5"
+                  id="step4"
                   name="Concluir"
                   desc="finalizar"
                 >
