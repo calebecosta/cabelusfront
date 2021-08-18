@@ -59,7 +59,7 @@ module.exports = {
   'menu.todo': 'Todo',
   'menu.search': 'Search',
   'menu.docs': 'Docs',
-  'menu.agendamentos': 'Agendamentos',
+  'menu.agendamentos': 'Meus Agendamentos',
   'menu.list' : 'list',
   'menu.agendamento' : 'Agendamento',
   'menu.cliente' : 'Cliente',

@@ -82,7 +82,7 @@ const Login = () => {
               setStorage(data.data);
               if (data.data.usuario && data.data.usuario.id) {
                 setTimeout(() => {
-                  window.location = './app/agendamentos/form';   
+                  window.location = './app/agendamentos/novo-agendamento';   
                 }, 3000); 
               }
             } else {

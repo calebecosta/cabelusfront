@@ -299,7 +299,7 @@ const FormPontoMergulho = ({ match, intl }) => {
         const { error } = response.data;
 
         if (error === undefined) {
-          alert('Agendamento cadastrado com sucesso', 2000, 'success');
+          alert('Parabens, seu agendamento foi criado com sucesso', 3000, 'success');
           setTimeout(() => {
             window.location = `/app/agendamentos`;
           }, 1000);
