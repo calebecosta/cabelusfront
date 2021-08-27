@@ -37,7 +37,7 @@ import api from '../../../services/api';
 registerLocale("pt", pt)
 moment.locale('pt') 
 
-const FormPontoMergulho = ({ match, intl }) => {
+const FormAgendamento = ({ match, intl }) => {
    const [loading, setLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAgendamento, setIsAgendamento] = useState(false);
@@ -330,7 +330,7 @@ const FormPontoMergulho = ({ match, intl }) => {
       });
     } catch (error) {
       alert(
-        'Tivemos um pequeno problema para atualizar o status da operadora',
+        'Tivemos um pequeno problema para atualizar o agendamento',
         3000,
         'danger'
       );
@@ -534,4 +534,4 @@ const FormPontoMergulho = ({ match, intl }) => {
   );
 };
 
-export default injectIntl(FormPontoMergulho);
+export default injectIntl(FormAgendamento);

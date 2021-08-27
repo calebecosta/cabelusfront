@@ -21,7 +21,7 @@ import IntlMessages from '../../../helpers/IntlMessages';
 import { alert } from '../../../helpers/Utils';
 import api from '../../../services/api';
 
-const FormPontoMergulho = ({ match, intl }) => {
+const FormColaboradores = ({ match, intl }) => {
    const [loading, setLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -273,4 +273,4 @@ const FormPontoMergulho = ({ match, intl }) => {
   );
 };
 
-export default injectIntl(FormPontoMergulho);
+export default injectIntl(FormColaboradores);
