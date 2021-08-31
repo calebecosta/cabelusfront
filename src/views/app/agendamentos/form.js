@@ -276,11 +276,11 @@ const FormAgendamento = ({ match, intl }) => {
 
   const update = (obj) => {
     try {
-      api.put(`/pontomergulho/${id}`, obj).then((response) => {
+      api.put(`/agendamento/${id}`, obj).then((response) => {
         const { error } = response.data;
 
         if (error === undefined) {
-          alert('Ponto de Mergulho editado com sucesso!', 2000, 'success');
+          alert('Agendamento editado com sucesso!', 2000, 'success');
           setTimeout(() => {
             window.location.reload();
           }, 600);
