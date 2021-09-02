@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Row,
   Button,
@@ -17,11 +17,6 @@ import { Colxx, Separator } from '../../components/common/CustomBootstrap';
 import Breadcrumb from '../navs/Breadcrumb';
 import IntlMessages from '../../helpers/IntlMessages';
 
-import {
-  DataListIcon,
-  ThumbListIcon,
-  ImageListIcon,
-} from '../../components/svg';
 
 const ListPageHeading = ({
   intl,
@@ -42,7 +37,21 @@ const ListPageHeading = ({
 }) => {
   const [dropdownSplitOpen, setDropdownSplitOpen] = useState(false);
   const [displayOptionsIsOpen, setDisplayOptionsIsOpen] = useState(false);
+  const [btnAgendamento, setBtnAgendamento] = useState('');
   const { messages } = intl;
+
+
+  useEffect(() => {
+    const getActualUser = () => {
+      const user = localStorage.getItem('@cabelus/tipo_usuario')
+      
+      if(user === 'cli'){
+        setBtnAgendamento('/app/agendamentos/novo-agendamento')
+      }else
+      setBtnAgendamento('/app/agendamentos/form')
+    }
+    getActualUser();
+  })
 
   return (
     <Row>
@@ -56,7 +65,7 @@ const ListPageHeading = ({
               color="primary"
               size="lg"
               className="top-right-button"
-              href="form"
+              href={btnAgendamento}
             >
               <IntlMessages id="pages.add-novo-agendamento" />
             </Button>
