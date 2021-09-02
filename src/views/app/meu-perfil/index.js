@@ -112,9 +112,10 @@ const FormStand = ({ match, intl }) => {
   }
 
   useEffect(() => {
-    async function getData() {
+    async function getData() {    
       try {
-        const response = await api.get(`/usuario/${id}`);
+        const route = localStorage.getItem('@cabelus/tipo_usuario') === 'cli' ? 'cliente' : 'usuario';
+        const response = await api.get(`/${route}/${id}`);
 
         const { error } = response.data;
 
