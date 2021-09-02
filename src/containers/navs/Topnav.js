@@ -309,7 +309,7 @@ const TopNav = ({
             <DropdownToggle className="p-0" color="empty">
               <span className="name mr-1">{{...getCurrentUser()}.nome}</span>
               <span>
-                <img alt="Profile" src={`https://ui-avatars.com/api/?name=${user.nome}`} />
+                <img alt="Profile" src={`https://i.pravatar.cc/?u${Math.random()}`} />
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>
