@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable no-param-reassign */
 import React, { useState, useEffect, Suspense } from 'react';
 import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
@@ -24,8 +25,7 @@ const Login = () => {
   const [nome, setNomeCliente] = useState('');
   const [email, setEmailCliente] = useState('');
   const [endereco, setEndereco] = useState('');
-  const [Oldpassword, setOldPassword] = useState('');
-  const [passwordAgain, setPasswordAgain] = useState('');
+
 
   const communicate = (text, time, type) => {
     if (type === 'success') {
@@ -46,10 +46,35 @@ const Login = () => {
     let error;
     if (!value) {
       error = 'Por favor, preencha o campo E-mail';
-    }
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      error = "E-mail inválido";
+    }else
+    setEmailCliente(value)
+    
     return error;
   };
 
+
+  const validateNome = (value) => {
+    let error;
+    if (!value) {
+      error = "Por favor, preencha o campo Nome";
+    }else
+    setNomeCliente(value)
+    
+    return error;
+  };
+
+
+  const validateEndereco = (value) => {
+    let error;
+    if (!value) {
+      error = "Por favor, preencha o campo Endereço";
+    }else
+    setEndereco(value)
+
+    return error;
+  };
 
   const setStorage = (data) => {
     setCurrentUser(data.usuario);
@@ -58,11 +83,13 @@ const Login = () => {
     api.defaults.headers.Authorization = `Bearer ${data.token}`;
   };
 
-   const onUserCadastro = () => {
+  const onUserCadastro = async (values) => {
+    if (!loading) {
+      if (values.email !== "") {
     const obj = {
-      nome,
-      endereco,
-      email,
+      nome : nome,
+      endereco : endereco,
+      email : email,
       senha: password,
     };
   
@@ -113,12 +140,14 @@ const Login = () => {
       });
     } catch (error) {
       alert('Ops... Estamos passando por uma instabilidade..', 3000, 'danger');
+      }
     }
-  };
+  }
+};
 
 
 
-  const initialValues = { login, password };
+  const initialValues = { nome,email,endereco,login, password };
 
   return (
     <UserLayout>
@@ -145,9 +174,13 @@ const Login = () => {
                         <Field
                           className="form-control"
                           name="nome"
-                          onChange={(e) => setNomeCliente(e.target.value)}
-                          // validate={validateEmail}
+                          validate={validateNome}
                         />
+                         {errors.nome && touched.nome && (
+                          <div className="invalid-feedback d-block">
+                            {errors.nome}
+                          </div>
+                        )}
                       </FormGroup>
                     
                       <FormGroup className="form-group has-float-label">
@@ -158,8 +191,13 @@ const Login = () => {
                           className="form-control"
                           type="text"
                           name="email"
-                          onChange={(e) => setEmailCliente(e.target.value)}
+                          validate={validateEmail}
                         />
+                         {errors.email && touched.email && (
+                          <div className="invalid-feedback d-block">
+                            {errors.email}
+                          </div>
+                        )}
                         
                       </FormGroup>
                       <FormGroup className="form-group has-float-label">
@@ -169,10 +207,15 @@ const Login = () => {
                         <Field
                           className="form-control"
                           type="text"
-                          onChange={(e) => setEndereco(e.target.value)}
                           name="endereco"
+                          validate={validateEndereco}
                         />
-                        
+                         {errors.endereco && touched.endereco && (
+                          <div className="invalid-feedback d-block">
+                            {errors.endereco}
+                          </div>
+                        )}
+
                       </FormGroup>
                       <FormGroup className="form-group has-float-label">
                         <Label>
@@ -182,7 +225,7 @@ const Login = () => {
                           className="form-control"
                           type="password"
                           name="password"
-                          
+
                         />
                        
                       </FormGroup>
