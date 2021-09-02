@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect, Suspense } from 'react';
 import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
@@ -81,6 +82,21 @@ const Login = () => {
               setLoading(false);
               setStorage(data.data);
               if (data.data.usuario && data.data.usuario.id) {
+
+                data.data.usuario.grupo = { id : ''};
+
+                data.data.usuario.grupo.id = 0;
+                data.data.usuario.grupo.nome = "Cliente";
+                data.data.usuario.grupo.funcoes =[ { id : "" , nome : ""},{ id : "" , nome : ""}];
+
+                data.data.usuario.grupo.funcoes[0].id = 9;
+                data.data.usuario.grupo.funcoes[0].nome = "Cliente ( Função meu perfil)";
+
+                data.data.usuario.grupo.funcoes[1].id = 1;
+                data.data.usuario.grupo.funcoes[1].nome = "Acesso ao sistema";
+
+                setStorage(data.data);
+
                 setTimeout(() => {
                   window.location = './app/agendamentos/novo-agendamento';   
                 }, 3000); 

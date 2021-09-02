@@ -92,7 +92,7 @@ const Login = () => {
                   window.location = './app/agendamentos';   
               }else{
                 response.data.usuario.grupo = { id : ''};
-                console.log(">>>",  response.data.usuario.grupo.id)
+
                 response.data.usuario.grupo.id = 0;
                 response.data.usuario.grupo.nome = "Cliente";
                 response.data.usuario.grupo.funcoes =[ { id : "" , nome : ""},{ id : "" , nome : ""}];
@@ -102,7 +102,7 @@ const Login = () => {
 
                 response.data.usuario.grupo.funcoes[1].id = 1;
                 response.data.usuario.grupo.funcoes[1].nome = "Acesso ao sistema";
-                                  
+
                 setStorage(response.data);
                  window.location = './app/agendamentos/list';
               }

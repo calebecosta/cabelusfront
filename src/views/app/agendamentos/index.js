@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
+import { Redirect, Switch,Route } from 'react-router-dom';
 import { ProtectedRoute } from '../../../helpers/authHelper';
 
 const ListAgendamento = React.lazy(() => import('./list'));
@@ -17,17 +17,17 @@ const Usuarios = ({ match }) => (
         component={ListAgendamento}
         render={(props) => <ListAgendamento {...props} />}
       />
-      <ProtectedRoute
+      <Route
         path={`${match.url}/form/:id?`}
-        component={ListAgendamento}
+        component={Form}
         render={(props) => <Form {...props} />}
       />
       <ProtectedRoute
         path={`${match.url}/calendario`}
         component={Calendario}
-        render={(props) => <Calendario {...props} />}
+        roles={5}
       />
-      <ProtectedRoute
+      <Route
         path={`${match.url}/novo-agendamento`}
         component={NovoAgendamento}
         render={(props) => <NovoAgendamento {...props} />}
