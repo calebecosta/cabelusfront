@@ -1,9 +1,10 @@
+/* eslint-disable import/named */
 import React, { Suspense } from 'react';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import AppLayout from '../../layout/AppLayout';
-// import { ProtectedRoute, UserRole } from '../../helpers/authHelper';
+ import { ProtectedRoute, UserRole } from '../../helpers/authHelper';
 
 
 const Perfil = React.lazy(() =>
@@ -36,33 +37,33 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/meu-perfil`}
               render={(props) => <Perfil {...props} />}
+              roles={1} // funcao sistema
             />
-            <Route
+            <ProtectedRoute
               path={`${match.url}/agendamentos`}
-              render={(props) => <Agendamento {...props} />}
+              component={Agendamento}
+              roles={1} // modulo agendamentos   
             />
-            <Route
+            <ProtectedRoute
               path={`${match.url}/colaboradores`}
-              render={(props) => <Colaborador {...props} />}
+              component={Colaborador}
+              roles={4}  // modulo colaboradores 
             />
-            <Route
+            <ProtectedRoute
               path={`${match.url}/clientes`}
-              render={(props) => <Clientes {...props} />}
+              component={Clientes}
+              roles={5} // modulo clientes 
             />
-            <Route
+            <ProtectedRoute
               path={`${match.url}/dashboard`}
-              render={(props) => <Dashboard {...props} />}
+              component={Dashboard}
+              roles={6} // modulo dashboard 
             />
-            <Route
+            <ProtectedRoute
               path={`${match.url}/servicos`}
-              render={(props) => <Servico {...props} />}
+              component={Servico}
+              roles={7} // modulo servicos 
             />
-        
-            {/* <ProtectedRoute
-                    path={`${match.url}/second-menu`}
-                    component={SecondMenu}
-                    roles={[UserRole.Admin]}
-            /> */}
             <Redirect to="/error" />
           </Switch>
         </Suspense>

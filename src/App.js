@@ -74,29 +74,34 @@ class App extends React.Component {
                   <ProtectedRoute
                     path={adminRoot}
                     component={ViewApp}
-                    roles={['admin']}
+                    roles={1}
                   />
                   
                   <Route
                     path="/error"
+                    component={ViewError}
                     exact
                     render={(props) => <ViewError {...props} />}
                   />
                   <Route
                     path="/esqueceu-senha"
+                    component={ViewEsqueceuSenha}
                     render={(props) => <ViewEsqueceuSenha {...props} />}
                   />
                   <Route
                     path="/cadastro"
+                    component={ViewCadastro}
                     render={(props) => <ViewCadastro {...props} />}
                   />
                   <Route
                     path="/unauthorized"
+                    component={ViewUnauthorized}
                     exact
                     render={(props) => <ViewUnauthorized {...props} />}
                   />
                   <Route
                     path="/"
+                    component={ViewLogin}
                     exact
                     render={(props) => <ViewLogin {...props} />}
                   />

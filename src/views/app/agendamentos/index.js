@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-// import { ProtectedRoute, UserRole } from '../../../helpers/authHelper';
+import { Redirect, Switch } from 'react-router-dom';
+import { ProtectedRoute } from '../../../helpers/authHelper';
 
 const ListAgendamento = React.lazy(() => import('./list'));
 
@@ -12,20 +12,24 @@ const Usuarios = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
       <Redirect exact from={`${match.url}/`} to={`${match.url}/list`} />
-      <Route
+      <ProtectedRoute
         path={`${match.url}/list`}
+        component={ListAgendamento}
         render={(props) => <ListAgendamento {...props} />}
       />
-      <Route
+      <ProtectedRoute
         path={`${match.url}/form/:id?`}
+        component={ListAgendamento}
         render={(props) => <Form {...props} />}
       />
-      <Route
+      <ProtectedRoute
         path={`${match.url}/calendario`}
+        component={Calendario}
         render={(props) => <Calendario {...props} />}
       />
-      <Route
+      <ProtectedRoute
         path={`${match.url}/novo-agendamento`}
+        component={NovoAgendamento}
         render={(props) => <NovoAgendamento {...props} />}
       />
 

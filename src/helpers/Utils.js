@@ -218,3 +218,20 @@ export const phoneMask = (value) => {
     .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
     .replace(/(-\d{4})\d+?$/, '$1');
 };
+
+export const getPermissionsCurrentUser = () => {
+  let permissions = [];
+  try {
+    const currentUser = getCurrentUser();
+    currentUser.grupo.funcoes.forEach((permissao) => {
+      permissions.push(permissao.id);
+    });
+  } catch (error) {
+    console.log(
+      '>>>>: src/helpers/Utils.js  : getPermissionsCurrentUser -> error',
+      error
+    );
+    permissions = null;
+  }
+  return permissions;
+};

@@ -53,8 +53,9 @@ const Login = () => {
           if (response.data && response.data.id) {
             setCurrentUser(response.data);
             if (user.grupo) {
-              window.location = './app/agendamentos';
-            }
+              window.location = './app/dashboard';
+            }else
+            window.location = './app/agendamentos/list';
           }
         } else {
           localStorage.clear();
@@ -87,8 +88,23 @@ const Login = () => {
              console.log(">>>",response);
             if (response.data.error === undefined) {
               setStorage(response.data);
-              if (response.data.usuario && response.data.usuario.id) {
+              if (response.data.usuario && response.data.usuario.id && response.data.usuario.grupo) {
                   window.location = './app/agendamentos';   
+              }else{
+                response.data.usuario.grupo = { id : ''};
+                console.log(">>>",  response.data.usuario.grupo.id)
+                response.data.usuario.grupo.id = 0;
+                response.data.usuario.grupo.nome = "Cliente";
+                response.data.usuario.grupo.funcoes =[ { id : "" , nome : ""},{ id : "" , nome : ""}];
+
+                response.data.usuario.grupo.funcoes[0].id = 9;
+                response.data.usuario.grupo.funcoes[0].nome = "Cliente (Agendamentos, meu perfil e afins)";
+
+                response.data.usuario.grupo.funcoes[1].id = 1;
+                response.data.usuario.grupo.funcoes[1].nome = "Acesso ao sistema";
+                                  
+                setStorage(response.data);
+                 window.location = './app/agendamentos/list';
               }
             } else {
               communicate(response.data.error, 3000, 'danger');

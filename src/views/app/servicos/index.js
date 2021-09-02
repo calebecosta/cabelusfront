@@ -1,21 +1,23 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-const Form = React.lazy(() => import('./form'));
+const FormServicos = React.lazy(() => import('./form'));
+const ListServicos = React.lazy(() => import('./list'));
 
 
-const Usuarios = ({ match }) => (
+const Servicos = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
       <Redirect exact from={`${match.url}/`} to={`${match.url}/list`} />
       <Route
-        path={`${match.url}/form/:id?`}
-        render={(props) => <Form {...props} />}
+        path={`${match.url}/list`}
+        render={(props) => <ListServicos {...props} />}
       />
-
-
-      <Redirect to="/error" />
+      <Route
+        path={`${match.url}/form/:id?`}
+        render={(props) => <FormServicos {...props} />}
+      />
     </Switch>
   </Suspense>
 );
-export default Usuarios;
+export default Servicos;

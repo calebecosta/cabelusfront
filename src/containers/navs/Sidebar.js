@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import IntlMessages from '../../helpers/IntlMessages';
+import { getPermissionsCurrentUser } from '../../helpers/Utils';
 
 import {
   setContainerClassnames,
@@ -341,10 +342,11 @@ class Sidebar extends Component {
 
   // eslint-disable-next-line no-shadow
   filteredList = (menuItems) => {
-    const { currentUser } = this.props;
-    if (currentUser) {
+    const permissions = getPermissionsCurrentUser();
+    
+    if (permissions) {
       return menuItems.filter(
-        (x) => (x.roles && x.roles.includes(currentUser.role)) || !x.roles
+        (x) => (x.roles && permissions.includes(x.roles)) || !x.roles
       );
     }
     return menuItems;
