@@ -307,7 +307,7 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Calebe Costa</span>
+              <span className="name mr-1">{{...getCurrentUser()}.nome}</span>
               <span>
                 <img alt="Profile" src={`https://ui-avatars.com/api/?name=${user.nome}`} />
               </span>
