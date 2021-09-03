@@ -37,7 +37,7 @@ const DataAgendamento = () => {
 
   return (
     <>
-      <Colxx sm={6}>
+      <Colxx sm={12}>
         <FormGroup>
           <Label for="colaborador">Data de Agendamento</Label>
           <DatePicker

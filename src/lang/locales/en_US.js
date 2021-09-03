@@ -81,6 +81,8 @@ module.exports = {
   'pages.go-back-home': 'Voltar',
   'dashboards.calendar': 'Calendário de Agendamentos',
   'menu.calendar': 'Calendário',
+  'menu.reports': 'Relatorios',
+  'menu.relatorios': 'Relatorios',
   'pages.add-novo-servico' : 'Novo servico',
   'menu.novo-servico' : 'Serviço',
 

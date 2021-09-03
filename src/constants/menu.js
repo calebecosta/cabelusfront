@@ -42,12 +42,21 @@ const data = [
     to: `${adminRoot}/meu-perfil`,
     roles: 1, 
   },
+  
   {
     id: 'calendar',
     icon: 'iconsminds-calendar-4',
     label: 'menu.calendar',
     to: `${adminRoot}/agendamentos/calendario`,
     roles: 8, 
+  },
+
+  {
+    id: 'reports',
+    icon: 'iconsminds-paper',
+    label: 'menu.reports',
+    to: `${adminRoot}/relatorios`,
+    roles: 11, 
   },
 ];
 export default data;

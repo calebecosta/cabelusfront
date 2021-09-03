@@ -55,6 +55,9 @@ const FormStand = ({ match, intl }) => {
   const [foto_id, setFotoId] = useState('');
   const [login, setLogin] = useState('');
 
+
+  const tpuser = localStorage.getItem('@cabelus/tipo_usuario') === 'cli' ? 'cliente' : 'usuario';
+
   useEffect(() => {
     const usuario = getCurrentUser();
     setId(usuario.id);
@@ -140,11 +143,11 @@ const FormStand = ({ match, intl }) => {
 
   const update = (obj) => {
     try {
-      api.put(`/usuario/${id}`, obj).then((response) => {
+     
+      api.put(`/${tpuser}/${id}`, obj).then((response) => {
         const { error } = response.data;
 
         if (error === undefined) {
-          setCurrentUser(response.data);
           communicate('Dados editados com sucesso', 2000, 'success');
           setTimeout(() => {
             window.location.reload();
@@ -235,7 +238,7 @@ const FormStand = ({ match, intl }) => {
                     </FormGroup>
                   </Colxx>
 
-                  <Colxx sm={6}>
+                  <Colxx sm={(tpuser !== 'cliente' ? 6 : 3)}>
                     <FormGroup>
                       <Label for="email">
                         <IntlMessages id="user.email" />
@@ -252,7 +255,7 @@ const FormStand = ({ match, intl }) => {
                         requiredField('O campo e-mail é obrigatório')}
                     </FormGroup>
                   </Colxx>
-
+                  {tpuser !== 'cliente' && (
                   <Colxx sm={6}>
                     <FormGroup>
                       <Label for="login">Login</Label>
@@ -268,8 +271,9 @@ const FormStand = ({ match, intl }) => {
                         requiredField('O campo login é obrigatório')}
                     </FormGroup>
                   </Colxx>
+                  )}
 
-                  <Colxx sm={6}>
+                  <Colxx sm={(tpuser !== 'cliente' ? 3 : 6)}>
                     <FormGroup>
                       <Label for="old-password">
                         <IntlMessages id="user.current-password" />
@@ -284,7 +288,7 @@ const FormStand = ({ match, intl }) => {
                     </FormGroup>
                   </Colxx>
 
-                  <Colxx sm={3}>
+                  <Colxx sm={(tpuser !== 'cliente' ? 3 : 3)}>
                     <FormGroup>
                       <Label for="password">
                         <IntlMessages id="user.new-password" />

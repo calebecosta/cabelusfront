@@ -23,9 +23,7 @@ import {
 
 } from 'reactstrap';
 import { injectIntl } from 'react-intl';
-
 import Select from 'react-select';
-
 import { Colxx } from '../../../components/common/CustomBootstrap';
 import Breadcrumb from '../../../containers/navs/Breadcrumb';
 import CustomSelectInput from '../../../components/common/CustomSelectInput';

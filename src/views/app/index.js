@@ -25,6 +25,9 @@ const Dashboard = React.lazy(() =>
 const Servico = React.lazy(() =>
   import(/* webpackChunkName: "viwes-gogo" */ './servicos')
 );
+const Relatorio = React.lazy(() =>
+  import(/* webpackChunkName: "viwes-gogo" */ './relatorios')
+);
 
 const App = ({ match }) => {
   return (
@@ -63,6 +66,11 @@ const App = ({ match }) => {
               path={`${match.url}/servicos`}
               component={Servico}
               roles={7} // modulo servicos 
+            />
+            <ProtectedRoute
+              path={`${match.url}/relatorios`}
+              component={Relatorio}
+              roles={11} // modulo relatorio 
             />
             <Redirect to="/error" />
           </Switch>
